@@ -1,0 +1,229 @@
+{
+  "name": "amdesk",
+  "title": "Amdesk",
+  "version": "1.0.0",
+  "description": "Help Center HTML template for your digital products",
+  "author": "dexad, nK",
+  "website": "https://nkdev.info/",
+  "purchase": "https://themeforest.net/user/_nk/portfolio",
+  "support": "https://nk.ticksy.com/",
+  "license": "You must have a valid license purchased only from ThemeForest (the above link) in order to legally use the theme for your project.",
+  "scripts": {
+    "dev": "gulp",
+    "deploy": "gulp deploy",
+    "production": "gulp production",
+    "css-lint": "stylelint --syntax scss \"src/css/**/*.scss\"",
+    "css-lint-fix": "stylelint --fix --syntax scss \"src/css/**/*.scss\"",
+    "js-lint": "eslint src/js/",
+    "js-lint-fix": "eslint --fix src/js/",
+    "lint": "npm-run-all css-lint js-lint",
+    "lint-fix": "npm-run-all css-lint-fix js-lint-fix",
+    "update:packages": "npm i -g npm-check-updates && npm-check-updates -u && npm install"
+  },
+  "gulp_config": {
+    "variables": {
+      "src": "./src",
+      "dist": "./dist",
+      "production": "./dist/production",
+      "deploy": "./dist/deploy",
+      "template_name": "amdesk",
+      "template_title": "Amdesk"
+    },
+    "browserSync": {
+      "proxy": "127.0.0.1:8000",
+      "open": true,
+      "notify": false
+    },
+    "php": {
+      "base": "{dist}/{template_name}",
+      "port": 8000,
+      "keepalive": true,
+      "stdio": "ignore"
+    },
+    "static": [
+      {
+        "from": "{src}/static/**",
+        "to": "{dist}/{template_name}"
+      },
+      {
+        "from": [
+          "node_modules/*jquery/dist/jquery.min.js",
+          "node_modules/*object-fit-images/dist/ofi.min.js",
+          "node_modules/*popper.js/dist/umd/popper.min.js",
+          "node_modules/*popper.js/dist/umd/popper.min.js.map",
+          "node_modules/*bootstrap/dist/js/bootstrap.min.js",
+          "node_modules/*bootstrap/dist/js/bootstrap.min.js.map",
+          "node_modules/*bootstrap/dist/css/bootstrap.min.css",
+          "node_modules/*bootstrap/dist/css/bootstrap.min.css.map",
+          "node_modules/*cleave.js/dist/cleave.min.js",
+          "node_modules/*validator/validator.min.js",
+          "node_modules/@fortawesome/*fontawesome-free/js/all.js",
+          "node_modules/@fortawesome/*fontawesome-free/js/v4-shims.js",
+          "node_modules/*pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css",
+          "node_modules/*pixeden-stroke-7-icon/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.eot",
+          "node_modules/*pixeden-stroke-7-icon/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.svg",
+          "node_modules/*pixeden-stroke-7-icon/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.ttf",
+          "node_modules/*pixeden-stroke-7-icon/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.woff",
+          "node_modules/*sticky-kit/dist/sticky-kit.min.js",
+          "node_modules/*jarallax/dist/jarallax.css",
+          "node_modules/*jarallax/dist/jarallax.min.js",
+          "node_modules/*jarallax/dist/jarallax-element.min.js",
+          "node_modules/*jarallax/dist/jarallax-video.min.js",
+          "node_modules/*imagesloaded/imagesloaded.pkgd.min.js",
+          "node_modules/*swiper/dist/css/swiper.min.css",
+          "node_modules/*swiper/dist/js/swiper.min.js",
+          "node_modules/*isotope-layout/dist/isotope.pkgd.min.js",
+          "node_modules/*gist-embed/gist-embed.min.js",
+          "node_modules/*bootstrap-select/dist/css/bootstrap-select.min.css",
+          "node_modules/*bootstrap-select/dist/js/bootstrap-select.min.js",
+          "node_modules/*dropzone/dist/min/dropzone.min.css",
+          "node_modules/*dropzone/dist/min/dropzone.min.js",
+          "node_modules/*quill/dist/quill.min.js",
+          "node_modules/*quill/dist/quill.snow.css",
+          "node_modules/@fancyapps/*fancybox/dist/jquery.fancybox.min.css",
+          "node_modules/@fancyapps/*fancybox/dist/jquery.fancybox.min.js"
+        ],
+        "to": "{dist}/{template_name}/assets/vendor"
+      }
+    ],
+    "js": {
+      "from": "{src}/js/*.js",
+      "to": "{dist}/{template_name}/assets/js"
+    },
+    "css": {
+      "from": "{src}/css/**/*.{sass,scss,css}",
+      "to": "{dist}/{template_name}/assets/css",
+      "autoprefixer": {
+        "browsers": [
+          "last 4 version",
+          "> 1%"
+        ]
+      },
+      "sass": {
+        "indentedSyntax": true,
+        "indentWidth": 4,
+        "outputStyle": "expanded"
+      }
+    },
+    "html": {
+      "from": "{src}/html/*.html",
+      "to": "{dist}/{template_name}",
+      "dataFile": "{src}/html/data/global.json",
+      "renderPath": "{src}/html",
+      "htmltidy": {
+        "doctype": "html5",
+        "hideComments": false,
+        "indent": true
+      }
+    },
+    "images": {
+      "from": "{src}/images/**/*.{jpg,jpeg,png,gif,svg}",
+      "to": "{dist}/{template_name}/assets/images"
+    },
+    "watch": [
+      {
+        "task": "static",
+        "from": "{src}/static/**/*"
+      },
+      {
+        "task": "images",
+        "from": "{src}/images/**/*.{jpg,jpeg,png,gif,svg}"
+      },
+      {
+        "task": "html",
+        "from": "{src}/html/**/*.{html,json}"
+      },
+      {
+        "task": "css",
+        "from": "{src}/css/**/*.{sass,scss,css}"
+      },
+      {
+        "task": "js",
+        "from": "{src}/js/**/*.js"
+      }
+    ],
+    "deploy": {
+      "zip": [
+        {
+          "from": [
+            [
+              "{dist}/*{template_name}/**/*",
+              { "dot": true }
+            ]
+          ],
+          "to": "{dist}/{template_name}.zip"
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "@fancyapps/fancybox": "^3.5.2",
+    "@fortawesome/fontawesome-free": "^5.2.0",
+    "bootstrap": "^4.1.3",
+    "bootstrap-select": "^1.13.3",
+    "cleave.js": "^1.4.4",
+    "dropzone": "^5.5.1",
+    "gist-embed": "^2.6.0",
+    "imagesloaded": "^4.1.4",
+    "isotope-layout": "^3.0.6",
+    "jarallax": "^1.10.3",
+    "jquery": "^3.3.1",
+    "lg-fullscreen": "^1.0.1",
+    "lg-video": "^1.2.2",
+    "lightgallery": "^1.6.11",
+    "object-fit-images": "^3.2.3",
+    "pixeden-stroke-7-icon": "^1.2.3",
+    "popper.js": "^1.14.3",
+    "quill": "^1.3.6",
+    "sticky-kit": "^1.1.3",
+    "swiper": "^4.2.2",
+    "tether": "^1.4.4",
+    "validator": "^10.7.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.13.0",
+    "del": "^3.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.7.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cdnizer": "^1.1.7",
+    "gulp-changed": "^3.1.1",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-connect-php": "^1.0.3",
+    "gulp-data": "^1.2.0",
+    "gulp-header": "^1.8.12",
+    "gulp-htmltidy": "^0.2.3",
+    "gulp-if": "~2.0.2",
+    "gulp-javascript-obfuscator": "^1.1.4",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-modify-file": "^1.0.0",
+    "gulp-nunjucks-render": "^2.2.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.2.1",
+    "gulp-sequence": "^0.4.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-ssh": "^0.7.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-vinyl-zip": "^2.0.0",
+    "gulp-watch": "^4.3.3",
+    "husky": "^0.14.3",
+    "merge-stream": "^1.0.1",
+    "npm-run-all": "^4.1.2",
+    "string-template": "^1.0.0",
+    "stylelint": "^8.4.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^0.8.1",
+    "stylelint-scss": "^2.5.0",
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^4.0.3"
+  }
+}
